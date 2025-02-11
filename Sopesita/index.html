@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Una sorpresa para ti 🌸</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9ae1, #fad0c4);
+            font-family: 'Georgia', serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        .flower-container {
+            position: relative;
+            width: 150px;
+            height: 200px;
+            animation: sway 2s infinite alternate ease-in-out;
+        }
+        .flower {
+            width: 150px;
+            height: 150px;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+        .button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #e55d50;
+        }
+        @keyframes sway {
+            0% { transform: rotate(-5deg); }
+            100% { transform: rotate(5deg); }
+        }
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: red;
+            opacity: 0.7;
+            animation: floatUp 4s infinite linear;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="flower-container">
+        <img src="forecita.png" class="flower" alt="Flor en maceta">
+    </div>
+    <div class="message">Oye, te quiero decir algo...</div>
+    <button class="button" onclick="downloadLetter()">Toca aquí</button>
+
+    <script>
+        function downloadLetter() {
+            const link = document.createElement('a');
+            link.href = 'carta.pdf'; // Aquí pones el nombre de tu carta en PDF
+            link.download = 'carta.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        function createHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '100vh';
+                heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }, 500);
+        }
+        createHearts();
+    </script>
+</body>
+</html>
